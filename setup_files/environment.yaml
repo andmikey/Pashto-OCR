@@ -1,0 +1,12 @@
+name: final_assignment
+channels:
+  - pytorch
+dependencies:
+  - python=3.8 
+  - pytorch=1.10 
+  - cudatoolkit=11.3 
+  - torchvision
+  - pip 
+  - pip:
+    - trdg # TextRecognitionDataGenerator, for generating synthetic data samples 
+    - openmim # MMOCR toolbox, for training an OCR model
