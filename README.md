@@ -14,18 +14,27 @@ cd /scratch/gusandmich/final_assignment/
 git clone https://github.com/rahmad77/KPTI.git
 ```
 
-Set up TRDG to generate Pashto text. 
 Download the Pashto fonts:
 ```sh 
 cd /scratch/gusandmich/final_assignment/
 git clone https://github.com/zahidaz/pashto_fonts.git
 ```
 
-Edit the TRDG repo to include the new fonts following the instructions [here](https://github.com/Belval/TextRecognitionDataGenerator?tab=readme-ov-file#add-new-fonts). The package is installed in `/scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg`. The two-letter code for Pashto is ps.
+Copy the fonts: 
 
-- Copy the fonts: `cp /scratch/gusandmich/final_assignment/pashto_fonts/all_fonts/*.ttf /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/fonts/ps`
+```sh
+cp /scratch/gusandmich/final_assignment/pashto_fonts/all_fonts/*.ttf \
+    /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/fonts/ps
+```
 
-- Generate the dictionary (for synthetic data generation) and character lookup (for labelling): `python3 code/create_pashto_dictionary.py --input-path /scratch/gusandmich/final_assignment/KPTI/KPTI-TrainData --output-file-dict /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/dicts/ps.txt --output-file-chars /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/paddleocr/ppocr/utils/dict/ps_dict.txt`
+Generate the dictionary (for synthetic data generation) and character lookup (for labelling): 
+
+```sh 
+python3 code/create_pashto_dictionary.py \
+    --input-path /scratch/gusandmich/final_assignment/KPTI/KPTI-TrainData \
+    --output-file-dict /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/dicts/ps.txt \
+    --output-file-chars /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/paddleocr/ppocr/utils/dict/ps_dict.txt
+```
 
 
 ## Experiment setup
