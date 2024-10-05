@@ -4,74 +4,67 @@ import click
 import pandas as pd
 from nlpashto import Cleaner, Tokenizer
 
-# Train dataset has 12005 sentences.
-# Test dataset has 3002 sentences.
-# Final dataset has 12039 words.
 
-
-def words_from_df(df):
+def words_and_chars_from_content(contents):
     # Setup
     word_set = set()
+    char_set = set()
     cleaner = Cleaner()
     tokenizer = Tokenizer()
 
-    # The column names are actually a data entry, so pull that and process it too
-    first_entry = df.columns.values[1]
-    cleaned = cleaner.clean(first_entry)
+    # Clean, tokenize, and get the words and chars
+    cleaned = cleaner.clean(contents)
     tokenized = tokenizer.tokenize(cleaned)
     for sent in tokenized:
         for token in sent:
             word_set.add(token)
+            for char in token:
+                char_set.add(char)
 
-    # Overwrite column names and iterate through the rest of the data
-    df.columns = ["English", "Pashto"]
-    for idx, row in df.iterrows():
-        contents = row["Pashto"]
-        if contents:  # Skip rows with empty Pashto
-            cleaned = cleaner.clean(contents)
-            tokenized = tokenizer.tokenize(cleaned)
-            for sent in tokenized:
-                for token in sent:
-                    word_set.add(token)
-
-    return word_set
+    return word_set, char_set
 
 
 @click.command()
 @click.option(
-    "--output-file",
+    "--input-path",
+    type=click.Path(path_type=Path, exists=True),
+    default="/scratch/gusandmich/final_assignment/KPTI/KPTI-TrainData",
+)
+@click.option(
+    "--output-file-dict",
     type=click.Path(path_type=Path),
     default="/scratch/gusandmich/final_assignment/pashto_dict/dict.txt",
 )
-def create_dictionary(output_file):
-    # Dataset pulled from here: https://huggingface.co/datasets/adnankhan769/english_to_pashto_sentences_dataset
-    splits = {
-        "train": "data/train-00000-of-00001.parquet",
-        "test": "data/test-00000-of-00001.parquet",
-    }
-    train_df = pd.read_parquet(
-        "hf://datasets/adnankhan769/english_to_pashto_sentences_dataset/"
-        + splits["train"]
-    )
-    test_df = pd.read_parquet(
-        "hf://datasets/adnankhan769/english_to_pashto_sentences_dataset/"
-        + splits["test"]
-    )
+@click.option(
+    "--output-file-chars",
+    type=click.Path(path_type=Path),
+    default="/scratch/gusandmich/final_assignment/pashto_dict/char_dict.txt",
+)
+def create_dictionary(input_path, output_file_dict, output_file_chars):
+    # Use the KPTI train dataset
+    label_files = input_path.glob("*.txt")
 
-    print(f"Train dataset has {train_df.shape[0] + 1} sentences.")
-    print(f"Test dataset has {test_df.shape[0] + 1} sentences.")
+    word_sets = []
+    char_sets = []
 
-    train_set = words_from_df(train_df)
-    test_set = words_from_df(test_df)
+    for l in label_files:
+        contents = l.read_text()
+        (words, chars) = words_and_chars_from_content(contents)
+        word_sets.append(words)
+        char_sets.append(chars)
 
-    word_set = train_set.union(test_set)
+    word_set = set().union(*word_sets)
+    char_set = set().union(*char_sets)
 
-    print(f"Final dataset has {len(word_set)} words.")
-    print(f"Writing final dataset to {output_file}")
+    print(f"Final dataset has {len(word_set)} words and {len(char_set)} characters")
 
-    with open(output_file, "w+") as f:
+    with open(output_file_dict, "w+") as f:
         for word in word_set:
             f.write(f"{word}\n")
+
+    with open(output_file_chars, "w+") as f:
+        for char in char_set:
+            f.write(f"{char}\n")
 
 
 if __name__ == "__main__":
