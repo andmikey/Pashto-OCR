@@ -25,9 +25,8 @@ Edit the TRDG repo to include the new fonts following the instructions [here](ht
 
 - Copy the fonts: `cp /scratch/gusandmich/final_assignment/pashto_fonts/all_fonts/*.ttf /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/fonts/ps`
 
-- Generate the dictionary: `python3 code/create_pashto_dictionary.py --output-file /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/dicts/ps.txt`
+- Generate the dictionary (for synthetic data generation) and character lookup (for labelling): `python3 code/create_pashto_dictionary.py --input-path /scratch/gusandmich/final_assignment/KPTI/KPTI-TrainData --output-file-dict /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/dicts/ps.txt --output-file-chars /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/paddleocr/ppocr/utils/dict/ps_dict.txt`
 
-- Copy the dictionary: 
 
 ## Experiment setup
 Rough idea:
@@ -44,9 +43,27 @@ Limitations:
 Problems:
 - Couldn't find a good dataset for OCR that was freely available... this Pashto one was the only one 
 - Using different architecture (wanted to learn something that was closer to SOTA)
-- Found a monolingual dataset for Pashto but costs $$: https://live.european-language-grid.eu/catalogue/corpus/2462 
+- Found a monolingual dataset for Pashto but costs $$: https://live.european-language-grid.eu/catalogue/corpus/2462 so decided to use one from HuggingFace
 
-Possible models:
-- https://github.com/open-mmlab/mmocr/blob/main/configs/textrecog/sar/README.md 
-- https://github.com/open-mmlab/mmocr/blob/main/configs/textrecog/satrn/README.md 
 
+Questions:
+Aspects I can change:
+- Fonts
+- Skew angle
+- Blur
+- Distorsion
+- Width
+- Text colour 
+- Character spacing
+- Word count
+
+How many images needed for training?
+
+Test datasets:
+Choose 1 font
+Choose 5 fonts
+Choose all fonts
+
+Instructions from Paddle: https://paddlepaddle.github.io/PaddleOCR/en/ppocr/model_train/recognition.html#11-dataset-preparation 
+Better instructions: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.3/doc/doc_en/recognition_en.md 
+Example training data file: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.1/configs/rec/multi_language/rec_french_lite_train.yml 
