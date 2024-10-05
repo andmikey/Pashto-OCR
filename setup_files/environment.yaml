@@ -7,6 +7,10 @@ dependencies:
   - cudatoolkit=11.3 
   - torchvision
   - pip 
+  - pandas
+  - pyarrow
   - pip:
     - trdg # TextRecognitionDataGenerator, for generating synthetic data samples 
     - openmim # MMOCR toolbox, for training an OCR model
+    - nlpashto # Word segmentation
+    - click
