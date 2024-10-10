@@ -36,6 +36,18 @@ python3 code/create_pashto_dictionary.py \
     --output-file-chars /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/paddleocr/ppocr/utils/dict/ps_dict.txt
 ```
 
+Set up the Tesseract directory:
+
+```sh
+mkdir /scratch/gusandmich/final_assignment/tesseract_model && cd $_
+cp -r /usr/share/tesseract/tessdata/* . 
+wget https://github.com/tesseract-ocr/tessdata_best/raw/refs/heads/main/pus.traineddata
+```
+
+You will now need to call Tesseract as:
+```sh 
+tesseract img_file.png - -l pus --tessdata-dir /scratch/gusandmich/final_assignment/tesseract_model/
+```
 
 ## Experiment setup
 Rough idea:
@@ -73,6 +85,20 @@ Choose 1 font
 Choose 5 fonts
 Choose all fonts
 
+Experiments:
+- Baseline: all fonts, random skew, random distortion, random blur, 30k samples
+- Go down to just one font 
+- Go down to five fonts
+- Remove skew
+- Remove distortion 
+- Remove blur
+- Remove Gaussian noise background
+- Using baseline, generate:
+    - 30k 
+    - 150k
+    - 450k images
+
+Training Paddle:
 Instructions from Paddle: https://paddlepaddle.github.io/PaddleOCR/en/ppocr/model_train/recognition.html#11-dataset-preparation 
 Better instructions: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.3/doc/doc_en/recognition_en.md 
 Example training data file: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.1/configs/rec/multi_language/rec_french_lite_train.yml 
