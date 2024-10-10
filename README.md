@@ -36,6 +36,13 @@ python3 code/create_pashto_dictionary.py \
     --output-file-chars /scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/paddleocr/ppocr/utils/dict/ps_dict.txt
 ```
 
+Edit the TRDG code on line 25 of the file `/scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/utils.py` to include Pashto:
+
+```py
+    if lang in ("ar", "cn", "hi"):
+    if lang in ("ar", "cn", "hi", "ps"):
+```
+
 Set up the Tesseract directory:
 
 ```sh
