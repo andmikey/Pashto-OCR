@@ -9,6 +9,7 @@ dependencies:
   - pip 
   - pandas
   - pyarrow
+  - ipykernel
   - pip:
     - trdg # TextRecognitionDataGenerator, for generating synthetic data samples 
     - nlpashto # Word segmentation
