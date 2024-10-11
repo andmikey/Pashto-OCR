@@ -99,8 +99,6 @@ Example training data file: https://github.com/PaddlePaddle/PaddleOCR/blob/relea
 
 
 Todos:
-- Set up training data directories in the correct format for the simulated data
-- Set up training / testing data directories from the KPTI data
 - Decide on an architecture
 - Train models for all those architectures <- aim to get this running by Saturday
 - Test the performance of Tesseract + the trained models on the test data
