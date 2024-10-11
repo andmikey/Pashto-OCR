@@ -7,7 +7,7 @@ from trdg.generators import GeneratorFromDict
 
 baseline_experiment = GeneratorFromDict(
     language="ps",
-    count=100,  # Generate 30k training samples
+    count=30_000,  # Generate 30k training samples
     skewing_angle=10,  # Skew to a 10-degree angle
     random_skew=True,  # Randomize skew
     random_blur=True,  # Randomize blur
