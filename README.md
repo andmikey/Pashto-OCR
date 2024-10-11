@@ -14,6 +14,11 @@ cd /scratch/gusandmich/final_assignment/
 git clone https://github.com/rahmad77/KPTI.git
 ```
 
+And create the label files:
+```sh
+bash code/create_label_files.sh
+```
+
 Download the Pashto fonts:
 ```sh 
 cd /scratch/gusandmich/final_assignment/
@@ -67,30 +72,12 @@ Expect (obviously) performance of (1) > (2) > (3), but question of how close we 
 Limitations:
 - Training on fonts but testing on handwritten data 
 - Train and test for 'good' baseline are from the same distribution - paper didn't do this but I couldn't find any languages which had two sets of available training data
+- I think the annotation of symbols around letters isn't working properly
 
 Problems:
 - Couldn't find a good dataset for OCR that was freely available... this Pashto one was the only one 
 - Using different architecture (wanted to learn something that was closer to SOTA)
-- Found a monolingual dataset for Pashto but costs $$: https://live.european-language-grid.eu/catalogue/corpus/2462 so decided to use one from HuggingFace
-
-
-Questions:
-Aspects I can change:
-- Fonts
-- Skew angle
-- Blur
-- Distorsion
-- Width
-- Text colour 
-- Character spacing
-- Word count
-
-How many images needed for training?
-
-Test datasets:
-Choose 1 font
-Choose 5 fonts
-Choose all fonts
+- Found a monolingual dataset for Pashto but costs $$: https://live.european-language-grid.eu/catalogue/corpus/2462 so decided to just use the annotation text
 
 Experiments:
 - Baseline: all fonts, random skew, random distortion, random blur, 30k samples
@@ -106,6 +93,14 @@ Experiments:
     - 450k images
 
 Training Paddle:
-Instructions from Paddle: https://paddlepaddle.github.io/PaddleOCR/en/ppocr/model_train/recognition.html#11-dataset-preparation 
+Instructions from Paddle: https://paddlepaddle.github.io/PaddleOCR/latest/en/ppocr/model_train/recognition.html#11-dataset-preparation
 Better instructions: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.3/doc/doc_en/recognition_en.md 
 Example training data file: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.1/configs/rec/multi_language/rec_french_lite_train.yml 
+
+
+Todos:
+- Set up training data directories in the correct format for the simulated data
+- Set up training / testing data directories from the KPTI data
+- Decide on an architecture
+- Train models for all those architectures <- aim to get this running by Saturday
+- Test the performance of Tesseract + the trained models on the test data
