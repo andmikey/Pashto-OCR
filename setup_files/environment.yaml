@@ -7,6 +7,14 @@ dependencies:
   - cudatoolkit=11.3 
   - torchvision
   - pip 
+  - pandas
+  - pyarrow
+  - ipykernel
+  - cudnn # For paddleocr, missing from their environments
   - pip:
     - trdg # TextRecognitionDataGenerator, for generating synthetic data samples 
-    - openmim # MMOCR toolbox, for training an OCR model
+    - nlpashto # Word segmentation
+    - click
+    - paddlepaddle-gpu # For GPU training
+    - paddleocr # For training model
+    - albumentations # For paddleocr, missing from their requirements
