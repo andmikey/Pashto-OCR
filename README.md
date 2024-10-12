@@ -107,3 +107,6 @@ Todos:
 - Decide on an architecture
 - Train models for all those architectures <- aim to get this running by Saturday
 - Test the performance of Tesseract + the trained models on the test data
+
+
+Problem encountered: always trains to zero accuracy. Suspect might be issue with character dictionary? 
