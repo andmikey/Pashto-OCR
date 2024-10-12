@@ -48,6 +48,11 @@ Edit the TRDG code on line 25 of the file `/scratch/gusandmich/conda_envs/final_
     if lang in ("ar", "cn", "hi", "ps"):
 ```
 
+Add to .bashrc:
+```sh
+export LD_LIBRARY_PATH=/scratch/gusandmich/conda_envs/final_assignment_conda/lib:$LD_LIBRARY_PATH
+```
+
 Set up the Tesseract directory:
 
 ```sh
