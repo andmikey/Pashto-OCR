@@ -87,9 +87,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: /scratch/gusandmich/final_assignment/synthetic_data/baseline_test
+    data_dir: /scratch/gusandmich/final_assignment/KPTI/KPTI-TestData
     label_file_list:
-    - /scratch/gusandmich/final_assignment/synthetic_data/baseline_test/_gt.txt
+    - /scratch/gusandmich/final_assignment/KPTI/KPTI-TestData/_gt.txt
     delimiter: ", "
     transforms:
     - DecodeImage:

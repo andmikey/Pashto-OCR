@@ -103,10 +103,51 @@ Better instructions: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.3/
 Example training data file: https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.1/configs/rec/multi_language/rec_french_lite_train.yml 
 
 
-Todos:
-- Decide on an architecture
-- Train models for all those architectures <- aim to get this running by Saturday
-- Test the performance of Tesseract + the trained models on the test data
+How to choose max length?
+Maximum seen in all the data is 31, so go for 35 to be safe: 
 
+cat KPTI-TrainData/_gt.txt | cut -f2 -d"," | cut -f2 -d"\"" | awk '{ print NF; }' | sort -nr | head -n1
+31
 
-Problem encountered: always trains to zero accuracy. Suspect might be issue with character dictionary? 
+cat KPTI-TestData/_gt.txt | cut -f2 -d"," | cut -f2 -d"\"" | awk '{ print NF; }' | sort -nr | head -n1
+27
+
+cat KPTI-ValidData/_gt.txt | cut -f2 -d"," | cut -f2 -d"\"" | awk '{ print NF; }' | sort -nr | head -n1
+29
+
+Trained baseline model to 500 epochs (/scratch/gusandmich/final_assignment/experiment_outputs/baseline_initial_train). 
+    - Training accuracy very good! 
+    - Evaluation accuracy garbage. 'Best' performance was around epoch 35, but cannot predict:
+    Best accuracy on a gray-background image:
+    ```
+    2024/10/12 13:56:08] ppocr INFO: infer_img: /scratch/gusandmich/final_assignment/KPTI/KPTI-TestData/Abasn-0002-10.jpg                                 
+    [2024/10/12 13:56:09] ppocr INFO:        result: "      0.9668120741844177
+    ```
+    Best accuracy on a brown-background image:
+    ```
+    [2024/10/12 13:56:39] ppocr INFO: infer_img: /scratch/gusandmich/final_assignment/KPTI/KPTI-TestData/GhorZa-0015-1194-7.jpg
+    [2024/10/12 13:56:39] ppocr INFO:        result: "ک " 0.7113693356513977
+    ```
+
+Hypotheses:
+- Grayscale vs RGB
+    - Tried running trained model on grayscaled image, still doesn't predict anything
+- Model not complicated enough
+    - Train same model on KPTI train set and see if it performs ok 
+    - Also does really poorly! 
+- Try a more complex model
+    - Documentation here on algorithms: https://github.com/PaddlePaddle/PaddleOCR/blob/de457325cd2bd7bca11219eb83763086a5b61e00/doc/doc_en/algorithm_overview_en.md 
+    - Try training on ResNet 50
+- Can't handle right-to-left
+    - Try running the pre-trained Arabic model
+    - Try running on English (TRDG issue?)
+- Is the problem that the training data is individual words but the test data is sets of words in a line?
+    - 
+
+- Generate a second baseline (for comparison)
+- Run comparison vs baseline 
+
+- Realized: max_text_length is the maximum number of *characters*. Will simply discard samples with more length than that. 
+    - https://github.com/PaddlePaddle/PaddleOCR/issues/4825
+    - https://github.com/PaddlePaddle/PaddleOCR/discussions/8964 
+    - Need to do word-level segmentation first to pull out images. 

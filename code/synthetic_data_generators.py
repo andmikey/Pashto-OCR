@@ -4,6 +4,7 @@ from pathlib import Path
 from trdg.generators import GeneratorFromDict
 
 # Experiment definitions
+# Sometimes crashes with "AttributeError: 'FreeTypeFont' object has no attribute 'getsize'"
 
 FONT_PREFIX = Path(
     "/scratch/gusandmich/conda_envs/final_assignment_conda/lib/python3.8/site-packages/trdg/fonts/ps/"
@@ -120,10 +121,11 @@ plain_white_background = GeneratorFromDict(
 
 EXPERIMENTS = {
     # "baseline": baseline_experiment,
+    "baseline_test": baseline_experiment,
     # "baseline_150k": baseline_150k_samples,
     # "baseline_450k": baseline_450k_samples,
-    "just_one_font": just_one_font,
-    "just_five_fonts": just_five_fonts,
+    # "just_one_font": just_one_font,
+    # "just_five_fonts": just_five_fonts,
     # "remove_skew": remove_skew,
     # "remove_distorsion": remove_distorsion,
     # "remove_blur": remove_blur,

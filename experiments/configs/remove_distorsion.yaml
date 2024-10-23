@@ -3,7 +3,7 @@ Global:
   epoch_num: 200
   log_smooth_window: 20
   print_batch_step: 10
-  save_model_dir: /scratch/gusandmich/final_assignment/experiment_outputs/baseline/
+  save_model_dir: /scratch/gusandmich/final_assignment/experiment_outputs/remove_distorsion/
   save_epoch_step: 3
   eval_batch_step:
   - 0
@@ -16,7 +16,7 @@ Global:
   infer_img: null
   character_dict_path: /scratch/gusandmich/final_assignment/pashto_dict/char_dict.txt
   character_type: ch # Instructions say to set to ch if new character type
-  max_text_length: 25
+  max_text_length: 35
   infer_mode: false
   use_space_char: true
 Optimizer:
@@ -59,9 +59,9 @@ Metric:
 Train:
   dataset:
     name: SimpleDataSet
-    data_dir: /scratch/gusandmich/final_assignment/synthetic_data/baseline
+    data_dir: /scratch/gusandmich/final_assignment/synthetic_data/remove_distorsion
     label_file_list:
-    - /scratch/gusandmich/final_assignment/synthetic_data/baseline/_gt.txt
+    - /scratch/gusandmich/final_assignment/synthetic_data/remove_distorsion/_gt.txt
     delimiter: ", "
     transforms:
     - DecodeImage:
