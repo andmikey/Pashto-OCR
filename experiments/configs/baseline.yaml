@@ -16,7 +16,7 @@ Global:
   infer_img: null
   character_dict_path: /scratch/gusandmich/final_assignment/pashto_dict/char_dict.txt
   character_type: ch # Instructions say to set to ch if new character type
-  max_text_length: 25
+  max_text_length: 35
   infer_mode: false
   use_space_char: true
 Optimizer:
