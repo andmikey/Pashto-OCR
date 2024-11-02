@@ -77,7 +77,7 @@ just_five_fonts = GeneratorFromDict(
 remove_skew = GeneratorFromDict(
     language="ps",
     count=30_000,
-    skewing_angle=10,
+    skewing_angle=0,  # Skewing angle 0
     random_skew=False,  # No skew
     random_blur=True,
     distorsion_type=3,
@@ -168,9 +168,3 @@ if __name__ == "__main__":
 
     for e in EXPERIMENTS:
         generate(e)
-
-    # thread_count = 2  # Number of experiments
-    # p = Pool(thread_count)
-
-    # for result in p.imap(generate, EXPERIMENTS):
-    #     print(f"Finished processing: {result}", flush=True)
