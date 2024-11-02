@@ -3,7 +3,7 @@
 This repository details my final project for LT2926 at the University of Gothenburg (Machine learning for statistical NLP: advanced). I investigate the feasibility of synthetic data generation for the OCR of Pashto, a low-resource language. 
 
 To navigate this repository:
-- [Final report](./report/report.pdf)
+- [Final report](./report/LT2926_report.pdf)
 - [Experiment definitions and run scripts](./experiments/)
 - [Setup instructions](./setup_instructions.md) (how to pull the data, add support for Pashto to TRDG and PaddleOCR)
 
