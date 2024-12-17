@@ -7,6 +7,10 @@ Key points for navigating this repository:
 - [Experiment definitions and run scripts](./experiments/)
 - [Setup instructions](./setup_instructions.md) (how to pull the data, add support for Pashto to TRDG and PaddleOCR)
 
+I received a final mark of 19/20 for this project, with the following comment from the marker:
+
+> Excellent work on a challenging project, even if it didn't actually come to a result table.  Courageous to admit that a numerical result is not to be had due to the experience you had with the tools.  I think the style could be a bit more impersonal although it was engaging to read. 
+
 To run the experiments, you can use [this script](./experiments/run_kpti_baseline.sh) to train models on the KPTI data; and [this script](./experiments/run_all_synthetic_experiments.sh) to train models on the synthetic data. 
 
 Some things to note:
